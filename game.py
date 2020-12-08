@@ -163,17 +163,6 @@ def randomSnack(rows, item):
     return (x,y)
 
 
-def message_box(subject, content):
-    root = tk.Tk()
-    root.attributes("-topmost", True)
-    root.withdraw()
-    messagebox.showinfo(subject, content)
-    try:
-        root.destroy()
-    except:
-        pass
-
-
 def main():
     global width, rows, s, snack, colors,yes
     colors = [(105, 181, 78), (68, 117, 113), (68, 74, 117), (117, 68, 68), (237, 173, 173), (203, 232, 160)]
@@ -196,9 +185,12 @@ def main():
 
         for x in range(len(s.body)):
             if s.body[x].pos in list(map(lambda z:z.pos,s.body[x+1:])): #check if snake overlap
-                print('Score: ', len(s.body))
-                message_box('You Lost!')
-                s.reset((10,10))
+                print('You Lost!', "try again" 'Score: ', len(s.body))
+                answer = input("Do you want to play again?(yes?): ")
+                if answer.lower()== "yes":
+                    s.reset((10,10))
+                else: 
+                    answer = input("Do you want to play again?(yes?): ")
                 break
 
             
